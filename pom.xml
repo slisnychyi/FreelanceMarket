@@ -21,6 +21,9 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.12</version>
         </dependency>
+
+        <!-- jdbc connection pool-->
+        <!--        c3po, hikari, apache-->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
@@ -53,7 +56,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>

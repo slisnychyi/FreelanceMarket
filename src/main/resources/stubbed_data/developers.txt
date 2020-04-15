@@ -1,0 +1,3 @@
+{"id":1, "name":"slisnychyi", "categories" : ["developer"]}
+{"id":2, "name":"terminator",  "categories" : ["developer", "designer"]}
+{"id":3, "name":"jamesbond",  "categories" : ["manager"]}
