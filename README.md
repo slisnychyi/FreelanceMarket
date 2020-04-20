@@ -10,8 +10,18 @@ h/w - connection pool, population from files to database ?
 
 * concurrency control
 * transaction
-* ACID / BASE
+* ACID / BASE / CAP theorem
 * isolation levels
 * sub select
 * practice
+
+
+A - atomicy
+C - consistancy
+I - isolation
+
+h/w:
+1. tests for connection pool 
+2. modify connection pool with drain logic
+
 
