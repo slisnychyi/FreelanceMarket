@@ -41,13 +41,16 @@ public class MyDataSource implements ConnectionPool {
     public boolean isAvaliableConnection() {
         return connections.size() > 0;
     }
+
+    public static Config createConfig(String jdbcUrl) {
+        return new Config(jdbcUrl);
+    }
 }
 
 @Data
 class Config {
 
-    private static final int DEFAULT_CONNECTIONS = 5;
-
+    private static final int DEFAULT_CONNECTIONS = 2;
     private final String jdbcUrl;
     private int connectionSize = DEFAULT_CONNECTIONS;
 }

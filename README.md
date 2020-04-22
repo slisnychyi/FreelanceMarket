@@ -12,7 +12,6 @@ h/w - connection pool, population from files to database ?
 * transaction
 * ACID / BASE / CAP theorem
 * isolation levels
-* sub select
 * practice
 
 
@@ -25,3 +24,10 @@ h/w:
 2. modify connection pool with drain logic
 
 
+### lesson 22.04
+
+* indexes (cluster, non_cluster, index structure implemenation)
+* schema
+* views
+* sub select
+* practice
