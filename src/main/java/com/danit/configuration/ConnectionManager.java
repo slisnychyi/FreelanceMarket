@@ -12,7 +12,7 @@ public class ConnectionManager {
 
     private final HikariDataSource dataSource;
 
-    private static final int CONNECTION_POOL_SIZE = 10;
+    private static final int CONNECTION_POOL_SIZE = 5;
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/freelance_market?user=postgres&password=docker&loggerLevel=TRACE";
 
     public ConnectionManager() {
