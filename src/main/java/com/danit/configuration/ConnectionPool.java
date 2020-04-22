@@ -5,11 +5,11 @@ import java.util.concurrent.TimeUnit;
 
 public interface ConnectionPool {
 
-    Connection getConnection() throws InterruptedException;
+    DrainConnection getConnection() throws InterruptedException;
 
-    Connection getConnection(long timeout, TimeUnit timeUnit) throws InterruptedException;
+    DrainConnection getConnection(long timeout, TimeUnit timeUnit) throws InterruptedException;
 
-    void releaseConnection(Connection connection);
+    void releaseConnection(DrainConnection connection);
 
     boolean isAvaliableConnection();
 

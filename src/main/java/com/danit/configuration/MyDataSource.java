@@ -13,27 +13,27 @@ public class MyDataSource implements ConnectionPool {
 
     private static final long DEFAULT_TIMEOUT = 1000;
 
-    private final BlockingQueue<Connection> connections;
+    private final BlockingQueue<DrainConnection> connections;
 
     public MyDataSource(Config configuration) throws SQLException {
         this.connections = new ArrayBlockingQueue<>(configuration.getConnectionSize());
         for (int i = 0; i < configuration.getConnectionSize(); i++) {
-            this.connections.add(DriverManager.getConnection(configuration.getJdbcUrl()));
+            this.connections.add(new DrainConnection(configuration.getJdbcUrl(), 5));
         }
     }
 
     @Override
-    public Connection getConnection() throws InterruptedException {
+    public DrainConnection getConnection() throws InterruptedException {
         return getConnection(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Connection getConnection(long timeout, TimeUnit timeUnit) throws InterruptedException {
+    public DrainConnection getConnection(long timeout, TimeUnit timeUnit) throws InterruptedException {
         return connections.poll(timeout, timeUnit);
     }
 
     @Override
-    public void releaseConnection(Connection connection) {
+    public void releaseConnection(DrainConnection connection) {
         this.connections.add(connection);
     }
 
@@ -50,4 +50,40 @@ class Config {
 
     private final String jdbcUrl;
     private int connectionSize = DEFAULT_CONNECTIONS;
+}
+
+
+class DrainConnection {
+    private static final int DEFAULT_CYCLES_OF_USE = 5;
+    private Connection connection;
+    private final String jdbcUrl;
+    private int cyclesOfUse;
+    private int used = 0;
+
+    public DrainConnection(String jdbcUrl, int cyclesOfUse) throws SQLException {
+        this.connection = DriverManager.getConnection(jdbcUrl);
+        this.jdbcUrl = jdbcUrl;
+        this.cyclesOfUse = cyclesOfUse;
+    }
+
+    public DrainConnection(String jdbcUrl) throws SQLException {
+        this.connection = DriverManager.getConnection(jdbcUrl);
+        this.jdbcUrl = jdbcUrl;
+        this.cyclesOfUse = DEFAULT_CYCLES_OF_USE;
+    }
+
+    public Connection getConnection() throws SQLException {
+        if (used > cyclesOfUse) {
+            used = 0;
+            connection = DriverManager.getConnection(jdbcUrl);
+        }
+        used++;
+        return connection;
+    }
+
+    public void releaseConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+
 }
