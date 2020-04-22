@@ -12,7 +12,6 @@ h/w - connection pool, population from files to database ?
 * transaction
 * ACID / BASE / CAP theorem
 * isolation levels
-* sub select
 * practice
 
 
@@ -27,13 +26,8 @@ h/w:
 
 ### lesson 22.04
 
+* indexes (cluster, non_cluster, index structure implemenation)
 * schema
-* indexes (cluster, non cluster)
 * views
-* triggers
-* store procedures
+* sub select
 * practice
-
-h/w:
-create index on price filed in tasks table
-create view with client, developer, tasks information 
