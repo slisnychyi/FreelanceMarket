@@ -25,3 +25,15 @@ h/w:
 2. modify connection pool with drain logic
 
 
+### lesson 22.04
+
+* schema
+* indexes (cluster, non cluster)
+* views
+* triggers
+* store procedures
+* practice
+
+h/w:
+create index on price filed in tasks table
+create view with client, developer, tasks information 
