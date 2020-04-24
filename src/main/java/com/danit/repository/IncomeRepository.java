@@ -1,10 +1,10 @@
 package com.danit.repository;
 
 import com.danit.configuration.ConnectionPool;
+import com.danit.configuration.DrainConnection;
 import com.danit.configuration.MyDataSource;
 import com.danit.model.Income;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -17,19 +17,18 @@ public class IncomeRepository {
     }
 
     public void save(Income income) {
-        Connection connection = null;
+        DrainConnection drainConnection = null;
         try {
-            connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into income (developer_id, amount) values (?,?)");
-            preparedStatement.setInt(1,income.getDeveloperId());
-            preparedStatement.setBigDecimal(2,income.getAmount());
+            drainConnection = dataSource.getConnection();
+            PreparedStatement preparedStatement = drainConnection.prepareStatement("insert into income (developer_id, amount) values (?,?)");
+            preparedStatement.setInt(1, income.getDeveloperId());
+            preparedStatement.setBigDecimal(2, income.getAmount());
             preparedStatement.execute();
-
 
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         } finally {
-            dataSource.releaseConnection(connection);
+            dataSource.releaseConnection(drainConnection);
         }
     }
 

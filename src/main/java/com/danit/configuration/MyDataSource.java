@@ -49,44 +49,7 @@ public class MyDataSource implements ConnectionPool {
 
 @Data
 class Config {
-
     private static final int DEFAULT_CONNECTIONS = 2;
     private final String jdbcUrl;
     private int connectionSize = DEFAULT_CONNECTIONS;
-}
-
-
-class DrainConnection {
-    private static final int DEFAULT_CYCLES_OF_USE = 5;
-    private Connection connection;
-    private final String jdbcUrl;
-    private int cyclesOfUse;
-    private int used = 0;
-
-    public DrainConnection(String jdbcUrl, int cyclesOfUse) throws SQLException {
-        this.connection = DriverManager.getConnection(jdbcUrl);
-        this.jdbcUrl = jdbcUrl;
-        this.cyclesOfUse = cyclesOfUse;
-    }
-
-    public DrainConnection(String jdbcUrl) throws SQLException {
-        this.connection = DriverManager.getConnection(jdbcUrl);
-        this.jdbcUrl = jdbcUrl;
-        this.cyclesOfUse = DEFAULT_CYCLES_OF_USE;
-    }
-
-    public Connection getConnection() throws SQLException {
-        if (used > cyclesOfUse) {
-            used = 0;
-            connection = DriverManager.getConnection(jdbcUrl);
-        }
-        used++;
-        return connection;
-    }
-
-    public void releaseConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-
 }

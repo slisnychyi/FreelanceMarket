@@ -20,12 +20,12 @@ public class IncomeService {
         this.incomeRepository = incomeRepository;
     }
 
-    public void sendIncomes() {
-        createRandomIncomes().forEach(incomeRepository::save);
+    public void sendIncomes(int count) {
+        createRandomIncomes(count).forEach(incomeRepository::save);
     }
 
-    private List<Income> createRandomIncomes() {
-        return IntStream.range(0, 10000)
+    private List<Income> createRandomIncomes(int count) {
+        return IntStream.range(0, count)
                 .mapToObj(i -> Income.builder()
                         .amount(new BigDecimal(ThreadLocalRandom.current().nextInt(100, 10000)))
                         .developerId(ThreadLocalRandom.current().nextInt(1, 3))
