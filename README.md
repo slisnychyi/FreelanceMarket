@@ -14,20 +14,18 @@ h/w - connection pool, population from files to database ?
 * isolation levels
 * practice
 
-
-A - atomicy
-C - consistancy
-I - isolation
-
-h/w:
-1. tests for connection pool 
-2. modify connection pool with drain logic
-
+h/w - tests for connection pool, modify connection pool with drain logic
 
 ### lesson 22.04
 
-* indexes (cluster, non_cluster, index structure implemenation)
-* schema
-* views
+* indexes (cluster, non_cluster, types, impl)
 * sub select
 * practice
+
+### lesson 27.04
+
+* view, trigger, schema
+* jpa api
+* practice
+
+h/w - create trigger with user change timestamp, update JpaNativeQuery
