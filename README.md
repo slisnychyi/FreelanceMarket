@@ -29,3 +29,7 @@ h/w - tests for connection pool, modify connection pool with drain logic
 * practice
 
 h/w - create trigger with user change timestamp, update JpaNativeQuery
+
+### lesson 29.04
+* http - tpc, model osi, dns - udp, tcp/udp - ip
+* practice (tasks on project)
